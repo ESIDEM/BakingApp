@@ -1,4 +1,4 @@
-package ng.com.techdepo.bakingapp;
+package ng.com.techdepo.bakingapp.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+
+import ng.com.techdepo.bakingapp.pojo.Ingredient;
+import ng.com.techdepo.bakingapp.R;
 
 /**
  * Created by ESIDEM jnr on 6/3/2017.

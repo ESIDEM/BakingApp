@@ -1,10 +1,13 @@
-package ng.com.techdepo.bakingapp;
+package ng.com.techdepo.bakingapp.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ng.com.techdepo.bakingapp.R;
+import ng.com.techdepo.bakingapp.fragments.MainActivityFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

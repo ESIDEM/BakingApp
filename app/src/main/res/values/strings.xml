@@ -11,4 +11,5 @@
     <string name="title_activity_steps_details">StepsDetailsActivity</string>
     <string name="next">Next</string>
     <string name="prev">Prev</string>
+    <string name="no_network">No Network connection.</string>
 </resources>

@@ -1,10 +1,13 @@
-package ng.com.techdepo.bakingapp;
+package ng.com.techdepo.bakingapp.pojo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import ng.com.techdepo.bakingapp.pojo.Ingredient;
+import ng.com.techdepo.bakingapp.pojo.Steps;
 
 /**
  * Created by ESIDEM jnr on 6/3/2017.

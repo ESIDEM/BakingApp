@@ -1,9 +1,12 @@
-package ng.com.techdepo.bakingapp;
+package ng.com.techdepo.bakingapp.activities;
 
 import android.os.Bundle;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+
+import ng.com.techdepo.bakingapp.R;
+import ng.com.techdepo.bakingapp.fragments.StepsDetailsActivityFragment;
 
 
 public class StepsDetailsActivity extends AppCompatActivity {
@@ -20,7 +23,7 @@ public class StepsDetailsActivity extends AppCompatActivity {
                     .commit();
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
 }

@@ -5,4 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context="StepsActivity"/>
+    tools:context=".activities.StepsActivity"/>

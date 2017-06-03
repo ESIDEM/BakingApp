@@ -1,4 +1,4 @@
-package ng.com.techdepo.bakingapp;
+package ng.com.techdepo.bakingapp.fragments;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -12,8 +12,14 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import static ng.com.techdepo.bakingapp.MainActivity.isTablet;
-import static ng.com.techdepo.bakingapp.MainActivityFragment.bakes;
+import ng.com.techdepo.bakingapp.R;
+import ng.com.techdepo.bakingapp.pojo.Steps;
+import ng.com.techdepo.bakingapp.activities.StepsDetailsActivity;
+import ng.com.techdepo.bakingapp.adapters.IngredientsAdapter;
+import ng.com.techdepo.bakingapp.adapters.StepsAdapter;
+
+import static ng.com.techdepo.bakingapp.activities.MainActivity.isTablet;
+import static ng.com.techdepo.bakingapp.fragments.MainActivityFragment.bakes;
 
 /**
  * A placeholder fragment containing a simple view.

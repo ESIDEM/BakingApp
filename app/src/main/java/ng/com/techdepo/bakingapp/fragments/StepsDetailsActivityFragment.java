@@ -1,4 +1,4 @@
-package ng.com.techdepo.bakingapp;
+package ng.com.techdepo.bakingapp.fragments;
 
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -30,8 +30,10 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-import static ng.com.techdepo.bakingapp.MainActivity.isTablet;
-import static ng.com.techdepo.bakingapp.StepsActivityFragment.steps;
+import ng.com.techdepo.bakingapp.R;
+
+import static ng.com.techdepo.bakingapp.activities.MainActivity.isTablet;
+import static ng.com.techdepo.bakingapp.fragments.StepsActivityFragment.steps;
 
 /**
  * A placeholder fragment containing a simple view.

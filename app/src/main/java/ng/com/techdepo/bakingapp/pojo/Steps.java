@@ -1,4 +1,4 @@
-package ng.com.techdepo.bakingapp;
+package ng.com.techdepo.bakingapp.pojo;
 
 import org.json.JSONException;
 import org.json.JSONObject;

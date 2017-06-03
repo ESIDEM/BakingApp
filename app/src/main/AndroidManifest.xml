@@ -3,6 +3,7 @@
     package="ng.com.techdepo.bakingapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -22,22 +23,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StepsActivity"
+            android:name=".activities.StepsActivity"
             android:label="@string/title_activity_steps"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ng.com.techdepo.bakingapp.MainActivity" />
+                android:value="ng.com.techdepo.bakingapp.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".StepsDetailsActivity"
+            android:name=".activities.StepsDetailsActivity"
             android:label="@string/title_activity_steps_details"
-            android:parentActivityName=".StepsActivity"
-            android:theme="@style/AppTheme">
-            <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="ng.com.techdepo.bakingapp.StepsActivity" /></activity>
+
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package ng.com.techdepo.bakingapp;
+package ng.com.techdepo.bakingapp.activities;
 
 import android.os.Bundle;
 
@@ -6,7 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 
-import static ng.com.techdepo.bakingapp.MainActivity.isTablet;
+import ng.com.techdepo.bakingapp.R;
+import ng.com.techdepo.bakingapp.fragments.StepsActivityFragment;
+import ng.com.techdepo.bakingapp.fragments.StepsDetailsActivityFragment;
+
+import static ng.com.techdepo.bakingapp.activities.MainActivity.isTablet;
 
 public class StepsActivity extends AppCompatActivity {
 
