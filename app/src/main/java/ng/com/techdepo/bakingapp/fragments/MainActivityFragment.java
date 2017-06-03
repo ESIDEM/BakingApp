@@ -3,6 +3,7 @@ package ng.com.techdepo.bakingapp.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -63,7 +64,7 @@ public class MainActivityFragment extends Fragment implements RecipieAdapter.Lis
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
         networkUp();
 
-        downoadRecipes();
+        downloadRecipes();
 
 
 
@@ -77,8 +78,17 @@ public class MainActivityFragment extends Fragment implements RecipieAdapter.Lis
         if (isTablet) {
             layoutManager = new GridLayoutManager(getActivity(), 3);
         } else {
+
+            if(this.getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT)
+            {
             layoutManager = new LinearLayoutManager(getActivity());
+        }else {
+
+                layoutManager = new GridLayoutManager(getActivity(), 2);
         }
+        }
+
+
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecipieAdapter(this, bakes);
         recyclerView.setAdapter(adapter);
@@ -96,7 +106,7 @@ public class MainActivityFragment extends Fragment implements RecipieAdapter.Lis
     @Override
     public void onRefresh() {
 
-        downoadRecipes();
+        downloadRecipes();
 
     }
 
@@ -180,7 +190,7 @@ public class MainActivityFragment extends Fragment implements RecipieAdapter.Lis
     }
 
 
-  private void downoadRecipes(){
+  private void downloadRecipes(){
 
       if(networkUp()){
 
