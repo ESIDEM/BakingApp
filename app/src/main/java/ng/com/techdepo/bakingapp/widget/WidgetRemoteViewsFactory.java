@@ -62,13 +62,13 @@ public class WidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.collection_widget_list_item);
+        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
         try {
-            rv.setImageViewBitmap(R.id.icon, BitmapFactory.decodeStream(new URL(bakes.get(position).getImage()).openConnection().getInputStream()));
+            rv.setImageViewBitmap(R.id.widget_image_, BitmapFactory.decodeStream(new URL(bakes.get(position).getImage()).openConnection().getInputStream()));
         } catch (IOException e) {
         }
-        rv.setTextViewText(R.id.name, bakes.get(position).getName());
-        rv.setTextViewText(R.id.servings, mContext.getString(R.string.servings) + " " + bakes.get(position).getServings());
+        rv.setTextViewText(R.id.widget_name, bakes.get(position).getName());
+        rv.setTextViewText(R.id.widget_servings, mContext.getString(R.string.servings) + " " + bakes.get(position).getServings());
         for (int i=0;i<bakes.get(position).getIngredients().size();i++){
             RemoteViews  ing= new RemoteViews(mContext.getPackageName(), R.layout.ingredient_item);
             ing.setTextViewText(R.id.ingredient,bakes.get(position).getIngredients().get(i).getIngredient());

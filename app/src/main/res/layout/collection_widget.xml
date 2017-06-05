@@ -35,7 +35,7 @@
             android:background="@android:color/white"
             android:divider="#eeeeee"
             android:dividerHeight="1dp"
-            tools:listitem="@layout/collection_widget_list_item"/>
+            tools:listitem="@layout/widget_list_item"/>
     </LinearLayout>
 
 </LinearLayout>
