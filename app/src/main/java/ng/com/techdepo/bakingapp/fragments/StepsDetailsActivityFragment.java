@@ -89,6 +89,8 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
             @Override
             public void onClick(View v) {
                 if (index > 0) {
+
+
                     index--;
                     longDescription.setText(steps.get(index).getDescription());
                     restExoPlayer(0, false);
@@ -179,9 +181,10 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
     @Override
     public void onPause() {
         super.onPause();
+        releasePlayer();
         exoPlayer.setPlayWhenReady(false);
         mediaSession.setActive(false);
-        releasePlayer();
+
     }
 
     @Override
