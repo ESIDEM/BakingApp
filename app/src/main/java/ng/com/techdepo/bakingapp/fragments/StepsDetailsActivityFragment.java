@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -29,6 +30,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 import ng.com.techdepo.bakingapp.R;
 
@@ -43,6 +45,7 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
     private static final String TAG = StepsDetailsActivityFragment.class.getSimpleName();
 
     private TextView longDescription;
+    private ImageView stepDetailImage;
     private Button prev;
     private Button next;
     protected static int index = 0;
@@ -61,6 +64,7 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
         View view = inflater.inflate(R.layout.fragment_steps_details, container, false);
 
         longDescription = (TextView) view.findViewById(R.id.description);
+        stepDetailImage = (ImageView) view.findViewById(R.id.step_detail_image);
         prev = (Button) view.findViewById(R.id.prev);
         next = (Button) view.findViewById(R.id.next);
         playerView = (SimpleExoPlayerView) view.findViewById(R.id.playerView);
@@ -73,6 +77,13 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
 
         getActivity().setTitle(steps.get(index).getShortDescription());
         longDescription.setText(steps.get(index).getDescription());
+        if(steps.get(index).getThumbnailURL().isEmpty()){
+            stepDetailImage.setImageResource(R.drawable.img_no_thumb);
+
+
+        }else {
+            Picasso.with(getContext()).load(steps.get(index).getThumbnailURL()).into(stepDetailImage);
+        }
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +181,13 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
         super.onPause();
         exoPlayer.setPlayWhenReady(false);
         mediaSession.setActive(false);
+        releasePlayer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        releasePlayer();
     }
 
     @Override
