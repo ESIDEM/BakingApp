@@ -37,21 +37,19 @@
 
             android:theme="@style/AppTheme"/>
 
-        <receiver
-            android:name=".widget.AppWidgetProvider"
-            android:label="CollectionAppWidgetProvider">
+        <receiver android:name=".appwidget.BakingWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="me.indiandollar.apps.todoappcollectionwidget.app.ACTION_DATA_UPDATED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info" />
+                android:resource="@xml/baking_widget_provider_info" />
         </receiver>
 
-        <service
-            android:name=".widget.WidgetRemoteViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <service android:name=".appwidget.RecipeStackViewWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false"/>
 
     </application>
 

@@ -34,6 +34,7 @@ import ng.com.techdepo.bakingapp.pojo.Recipie;
 import ng.com.techdepo.bakingapp.activities.StepsActivity;
 import ng.com.techdepo.bakingapp.adapters.RecipieAdapter;
 
+
 import static ng.com.techdepo.bakingapp.activities.MainActivity.isTablet;
 
 /**
@@ -178,6 +179,7 @@ public class MainActivityFragment extends Fragment implements RecipieAdapter.Lis
 
            loadViews(recipies);
            swipeRefreshLayout.setRefreshing(false);
+
            
        }
    }
