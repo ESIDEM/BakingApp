@@ -168,8 +168,17 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
     @Override
     public void onPause() {
         super.onPause();
+        releasePlayer();
         exoPlayer.setPlayWhenReady(false);
         mediaSession.setActive(false);
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        releasePlayer();
     }
 
     @Override
@@ -178,12 +187,7 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
         mediaSession.setActive(true);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        releasePlayer();
-        mediaSession.setActive(false);
-    }
+
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
