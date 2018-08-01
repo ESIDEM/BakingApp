@@ -2,6 +2,7 @@ package ng.com.techdepo.bakingapp.fragments;
 
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -50,9 +52,31 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
     private SimpleExoPlayerView playerView;
     private static MediaSessionCompat mediaSession;
     private PlaybackStateCompat.Builder stateBuilder;
-    private static long position = 0;
+    private static  final String TRACK_SELECTOR_KEY = "track_selector_key";
+    private static final String WINDOW_KEY ="window";
+    private static final String POSITION_KEY = "position";
+    private static final String AOTO_PLAY_KEY = "auto_play";
+    private long position ;
+    private boolean startAutoplay;
+    private int startWindow;
 
     public StepsDetailsActivityFragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState!=null){
+            startAutoplay = savedInstanceState.getBoolean(AOTO_PLAY_KEY);
+            startWindow = savedInstanceState.getInt(WINDOW_KEY);
+            position = savedInstanceState.getLong(POSITION_KEY);
+        }else {
+
+            startAutoplay = true;
+            startWindow = C.INDEX_UNSET;
+            position = C.TIME_UNSET;
+        }
     }
 
     @Override
@@ -92,7 +116,7 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
                     index++;
                     longDescription.setText(steps.get(index).getDescription());
                     restExoPlayer(0, false);
-                    initializePlayer(Uri.parse(steps.get(index).getVideoURL()));
+                   // initializePlayer(Uri.parse(steps.get(index).getVideoURL()));
                 }
             }
         });
@@ -105,6 +129,8 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
             prev.setVisibility(View.GONE);
             next.setVisibility(View.GONE);
         }
+
+
         return view;
     }
 
@@ -142,6 +168,7 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
             TrackSelector trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
             exoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
+            exoPlayer.setPlayWhenReady(true);
             playerView.setPlayer(exoPlayer);
             exoPlayer.addListener(this);
             String userAgent = Util.getUserAgent(getContext(), "StepsDetailsActivityFragment");
@@ -159,35 +186,66 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
         exoPlayer.setPlayWhenReady(playWhenReady);
     }
 
+
     private void releasePlayer() {
-        exoPlayer.stop();
-        exoPlayer.release();
-        exoPlayer = null;
+        if(exoPlayer!=null) {
+            updatePlayPosition();
+            exoPlayer.release();
+            exoPlayer = null;
+                    }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-     //   releasePlayer();
-   //     exoPlayer.setPlayWhenReady(false);
-     //   mediaSession.setActive(false);
+        if(Util.SDK_INT<=23) {
+               releasePlayer();
+            //     exoPlayer.setPlayWhenReady(false);
+            //   mediaSession.setActive(false);
+        }
 
+    }
+
+    private void updatePlayPosition(){
+        if(exoPlayer!=null){
+            startAutoplay = exoPlayer.getPlayWhenReady();
+            startWindow = exoPlayer.getCurrentWindowIndex();
+            position = Math.max(0,exoPlayer.getCurrentPosition());
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        releasePlayer();
+        if(Util.SDK_INT>23) {
+            releasePlayer();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mediaSession.setActive(true);
+        if(Util.SDK_INT<=23||exoPlayer==null){
+            initializePlayer(Uri.parse(steps.get(index).getVideoURL()));
+
+        }
+
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        updatePlayPosition();
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(Util.SDK_INT>23){
+            initializePlayer(Uri.parse(steps.get(index).getVideoURL()));
+        }
+    }
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
@@ -232,5 +290,13 @@ public class StepsDetailsActivityFragment extends Fragment implements ExoPlayer.
 
     @Override
     public void onPositionDiscontinuity() {
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        updatePlayPosition();
+        outState.putBoolean(AOTO_PLAY_KEY,startAutoplay);
+        outState.putInt(WINDOW_KEY,startWindow);
+        outState.putLong(POSITION_KEY,position);
     }
 }
